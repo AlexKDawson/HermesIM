@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Alex Dawson | Programmer and Tech Enthusiast</title>
+  <meta charset="UTF-8">
+
+
+  <%-include('helpers/bootstrap', {}); %>
+</head>
+
+<body>
+
+  <h1> HermesIM 0.0.1 </h1>
+
+  <div class = "container">
+    <div class = "jumbotron aln-center" style = "margin: 70px">
+
+
+      <form action="/" method="post">
+      Name: <input type="text" name="name" placeholder="your name"><br>
+      Message: <input type="text" name="message" placeholder="your message"><br>
+      <input type="submit" value="Send">
+      </form>
+
+    </div>
+  </div>
+  <div style = "overflow:scroll; height: 300px; padding:50px; background-color: #D9E9FF">
+  <ul>
+    <% for(var i=0; i<msgs.length; i++) { %>
+      <li><%= msgs[i].name + ": " + msgs[i].message%></li>
+    <% } %>
+  </ul>
+</div>
+
+</body>
+
+</html>

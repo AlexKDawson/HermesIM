@@ -1,0 +1,23 @@
+h1{
+  color: #363732;
+}
+
+p{
+  color: #F9A55A;
+}
+
+html{
+  overflow: hidden;
+}
+
+.aln-center{
+  text-align: center;
+}
+
+.aln-left{
+  text-align: left;
+}
+
+.aln-right{
+  text-align: right;
+}
