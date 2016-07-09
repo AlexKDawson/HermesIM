@@ -11,6 +11,6 @@ module.exports = function(app){
 
   app.post('/', function(req, res){
     send.msg(req, res);
-    res.redirect(200, '/'); //use a callback
+    res.redirect('/'); //use a callback
   });
 };
