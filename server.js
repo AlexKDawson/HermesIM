@@ -9,15 +9,15 @@ var path           = require ('path');
 var session        = require('express-session'); //needed for passport later
 var cookieParser   = require('cookie-parser'); //needed for passport later
 var mongoose       = require('mongoose');
+var passport       = require('passport');
+var flash          = require('connect-flash');
 var port           = 80;
-
-var dbconf         = require('./config/messagedb');
-
-//connect to db
-mongoose.connect(dbconf.url);
 
 //set ejs as view engine
 app.set('view engine', 'ejs');
+
+//configure passport
+require('./config/passport')(passport);
 
 //log requests
 app.use(morgan("combined"));
@@ -26,11 +26,17 @@ app.use(morgan("combined"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//acess public directory
+//passport
+app.use(session({ secret: 'root', resave: false, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());//(cookieParser and flash may be needed)
+app.use(flash());
+
+//access public directory
 app.use(express.static(__dirname + '/public'));
 
 //routes
-require('./app/routes')(app);
+require('./app/routes')(app, passport);
 
 //listen
 app.listen(port);

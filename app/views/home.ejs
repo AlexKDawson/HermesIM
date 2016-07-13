@@ -1,26 +1,24 @@
+<!-- app/views/home.ejs -->
+
 <!DOCTYPE html>
 <html>
+
 <head>
   <link rel="stylesheet" href="css/styles.css">
-  <title>Alex Dawson | Programmer and Tech Enthusiast</title>
+  <title>HermesIM | Messenger of the Gods</title>
   <meta charset="UTF-8">
-
-
   <%-include('helpers/bootstrap', {}); %>
 </head>
 
 <body>
-
   <h1> HermesIM 0.0.1 </h1>
-
   <div class = "container">
     <div class = "jumbotron aln-center" style = "margin: 70px">
 
-
       <form action="/" method="post">
-      Name: <input type="text" name="name" placeholder="your name"><br>
-      Message: <input type="text" name="message" placeholder="your message"><br>
-      <input type="submit" value="Send">
+        Name: <input type="text" name="name" placeholder="your name"><br>
+        Message: <input type="text" name="message" placeholder="your message"><br>
+        <input type="submit" value="Send">
       </form>
 
     </div>
@@ -32,7 +30,7 @@
       <th>Message</th>
       <th>Time stamp</th>
     </tr>
-  
+
     <!-- reverse this to render messages in time order -->
     <% var x = msgs.length; %>
 
@@ -46,8 +44,7 @@
       </tr>
     <% } %>
     </table>
-</div>
-
+  </div>
 </body>
 
 </html>

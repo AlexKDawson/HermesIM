@@ -1,3 +1,5 @@
+// app/controllers/retrieve.js
+
 var Message = require('../models/message');
 
 exports.output = function(callback){
