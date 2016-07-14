@@ -1,4 +1,4 @@
-<!-- app/views/signup.ejs -->
+<!-- app/views/login.ejs -->
 
 <!DOCTYPE html>
 <html>
@@ -16,13 +16,13 @@
   <h1> HermesIM 0.0.1 </h1>
   <div class = "container">
     <div class = "jumbotron aln-center" style = "margin: 70px">
-      <h2> Sign up </h2>
+      <h2> Log in </h2>
       <br>
       <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
       <% } %>
 
-      <form action="/signup" method="post">
+      <form action="/login" method="post">
         Name: <input type="text" name="email" placeholder="your email"><br>
         Password: <input type="password" name="password" placeholder="your password"><br>
         <input type="submit" value="Send">

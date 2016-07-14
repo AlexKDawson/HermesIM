@@ -14,36 +14,9 @@
   <h1> HermesIM 0.0.1 </h1>
   <div class = "container">
     <div class = "jumbotron aln-center" style = "margin: 70px">
-
-      <form action="/" method="post">
-        Name: <input type="text" name="name" placeholder="your name"><br>
-        Message: <input type="text" name="message" placeholder="your message"><br>
-        <input type="submit" value="Send">
-      </form>
-
+        <a href="/signup" class="btn btn-info" role="button">Signup</a>
+        <a href="/login" class="btn btn-info" role="button">Login</a>
     </div>
-  </div>
-  <div style = "overflow:scroll; height: 300px; padding:50px; background-color: #D9E9FF">
-    <table>
-    <tr>
-      <th>Sender</th>
-      <th>Message</th>
-      <th>Time stamp</th>
-    </tr>
-
-    <!-- reverse this to render messages in time order -->
-    <% var x = msgs.length; %>
-
-    <% while(x--) { %>
-      <tr>
-        <td><%= msgs[x].name + ": "%></td>
-        <td><%= msgs[x].message%></td>
-        <% if(msgs[x].createdAt) { %>
-          <td><%= msgs[x].createdAt.toString().split("GMT")[0].split(" ")[1] + " " + msgs[x].createdAt.toString().split("GMT")[0].split(" ")[2] + " " + msgs[x].createdAt.toString().split("GMT")[0].split(" ")[4]%> </td>
-          <% } %>
-      </tr>
-    <% } %>
-    </table>
   </div>
 </body>
 
