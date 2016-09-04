@@ -23,3 +23,40 @@ html{
 .aln-right{
   text-align: right;
 }
+
+.navbar-icon{
+  margin-top: -7px;
+}
+
+/* This works but is kind of messy*/
+.navbar-title a:hover, .navbar-title a{
+  color: #0072e7;
+  text-decoration: none;
+}
+.frmenu{
+  font-color: white;
+}
+
+.frmenulist{
+  width: inherit;
+  background-color: #D9E9FF;
+  margin-top: 20px
+}
+
+.navbtn{
+  background-color: #D9E9FF;
+  padding: 22px;
+  color: #0072e7;
+  text-decoration: none;
+}
+
+.friendbar{
+  background-color: #D9E9FF;
+  margin-top: -20px;
+  padding-top: 7px;
+  padding-left: 20px;
+}
+
+.addFrFlash{
+  color: black;
+}

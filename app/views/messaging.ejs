@@ -4,15 +4,59 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="css/styles.css">
-  <title>HermesIM | Messenger of the Gods</title>
-  <meta charset="UTF-8">
-  <%-include('helpers/bootstrap', {}); %>
+  <%- include("./helpers/head.ejs")%>
 </head>
 
 <body>
-  <h1> HermesIM 0.0.1 </h1>
-  <h2> Hello, <%= user.email %> </h2
+<!--NAVBAR -->
+  <script>
+
+    var addFr = angular.module('addFriend', []);
+
+    addFr.controller('addFriendController', function($scope, $http) {
+      $scope.carname = "Volvo";
+      $scope.formData = {"userEmail": "<%=user.email%>"};
+
+      $scope.processForm = function() {
+        $http({
+          method  : 'POST',
+          url     : '/freq',
+          data    : $.param($scope.formData),  // pass in data as strings
+          headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+        })
+        .success(function(data, status, headers, config){
+          $scope.addFriendFlash = data;
+        });
+      }
+    });
+  </script>
+
+  <nav class="navbar navbar-default">
+    <div class = "row">
+      <h2 class = "navbar-title col-md-2"><a href = "/messaging"> Hermes <img src = "favicon.png" height = "30" class = "navbar-icon"></a></h2>
+    </div>
+  </nav>
+
+
+
+  <nav class="friendbar navbar navbar-default">
+    <div class = "row">
+      <div ng-app="addFriend" ng-controller="addFriendController">
+        <row>
+          <form ng-submit="processForm()">
+            <input type="text" ng-model="formData.friendEmail">
+            <button type="submit">Add</button>
+          </form>
+           <!--<%= user.frReqs %> -->
+        </row>
+        <p class = "addFrFlash">{{addFriendFlash}}</p>
+      </div>
+    </div>
+  </nav>
+<!--END NAVBAR-->
+
+
+  <h2> Hello, <%= user.username %> </h2
   <div class = "container">
     <div class = "jumbotron aln-center" style = "margin: 70px">
 

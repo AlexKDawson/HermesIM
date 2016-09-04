@@ -11,7 +11,14 @@ var authdb = mongoose.createConnection(dbconf.url);
 
 var userSchema = new Schema({
   email: String,
-  password: String
+  password: String,
+  username: String,
+  friends:[
+    String
+  ],
+  frReqs:[
+    String
+  ]
 });
 
 //hash
