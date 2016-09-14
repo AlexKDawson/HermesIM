@@ -13,6 +13,7 @@ var userSchema = new Schema({
   email: String,
   password: String,
   username: String,
+  image: String,
   friends:[
     String
   ],

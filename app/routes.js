@@ -3,6 +3,7 @@
 var send = require('./controllers/send.js');
 var retrieve = require('./controllers/retrieve.js');
 var addFriend = require('./controllers/addFriend.js');
+var getUser = require('./controllers/getUser.js');
 
 module.exports = function(app, passport){
 
@@ -30,6 +31,10 @@ module.exports = function(app, passport){
 
   app.post('/freq', isLoggedIn, function(req, res){
     addFriend.add(req, res);
+  });
+
+  app.post('/freqProfiles', isLoggedIn, function(req, res){
+    getUser.output(req,res);
   });
 
   app.post('/signup', passport.authenticate('local-signup', {

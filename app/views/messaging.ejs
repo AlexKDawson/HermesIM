@@ -11,10 +11,9 @@
 <!--NAVBAR -->
   <script>
 
-    var addFr = angular.module('addFriend', []);
+    var app = angular.module('app', []);
 
-    addFr.controller('addFriendController', function($scope, $http) {
-      $scope.carname = "Volvo";
+    app.controller('addFriendController', function($scope, $http) {
       $scope.formData = {"userEmail": "<%=user.email%>"};
 
       $scope.processForm = function() {
@@ -29,6 +28,21 @@
         });
       }
     });
+
+    app.controller('seeFreqsController', function($scope, $http) {
+      $http({
+        method  : 'POST',
+        url     : '/freqprofiles',
+        data    : $.param({"freqs":'<%=user.frReqs%>'.split(',')}),
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+      })
+      .success(function(data, status, headers, config){
+        $scope.freqProfiles = data;
+      });
+    });
+
+
+
   </script>
 
   <nav class="navbar navbar-default">
@@ -41,15 +55,19 @@
 
   <nav class="friendbar navbar navbar-default">
     <div class = "row">
-      <div ng-app="addFriend" ng-controller="addFriendController">
-        <row>
-          <form ng-submit="processForm()">
-            <input type="text" ng-model="formData.friendEmail">
-            <button type="submit">Add</button>
-          </form>
-           <!--<%= user.frReqs %> -->
-        </row>
+      <div ng-app="app">
+        <div ng-controller="addFriendController">
+          <row>
+            <form ng-submit="processForm()">
+              <input type="text" ng-model="formData.friendEmail">
+              <button type="submit">Add</button>
+            </form>
+          </row>
+        </div>
         <p class = "addFrFlash">{{addFriendFlash}}</p>
+        <div ng-controller="seeFreqsController" class="ng-scope">
+          <p>{{freqProfiles}}</p>
+        </div>
       </div>
     </div>
   </nav>
