@@ -4,24 +4,32 @@ var User = require('../models/user');
 var userArray = "";
 
 exports.output = function(req, res){
-  var i = 1;
+  var arraySize = 0;
   var userArray = [];
+  var callsCompleted = 0;
 
-  while(true){
-    if(JSON.stringify(req.body["freqs[]"][i]) != undefined){
-      i++;
-    }
-    else{
-      break;
-    }
+  while(JSON.stringify(req.body["freqs[]"][arraySize]) != undefined){
+    arraySize++;
   }
 
-  for(var j = 0; j < i; j++){
+  for(var j = 0, k = arraySize; j < k; j++){
     User.findOne({ 'email' :  req.body["freqs[]"][j] }, function(err, user) {
       userArray.push(JSON.parse(JSON.stringify(user.username)));
-        console.log("***" + userArray);
+      console.log(arraySize + " " + userArray);
+      callsCompleted = maybeSend(arraySize, callsCompleted, res, userArray);
+      console.log("calls completed: " + callsCompleted)
     });
   }
-  console.log("***" + userArray);
+}
 
+function maybeSend(size, calls, res, array){
+  calls++;
+  if(calls == size){
+    res.send(array);
+    console.log("Array sent: " + array);
+    return -1;
+  }
+  else{
+    return calls;
+  }
 }
