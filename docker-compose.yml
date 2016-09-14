@@ -1,0 +1,12 @@
+hermes_web:
+  build: .
+  links:
+    - hermes_db
+  ports:
+    - "3000:3000"
+  volumes:
+    - .:/usr/src/app
+hermes_db:
+  image: mongo
+  ports:
+    - "27017:27017"

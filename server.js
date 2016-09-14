@@ -11,7 +11,7 @@ var cookieParser   = require('cookie-parser'); //needed for passport later
 var mongoose       = require('mongoose');
 var passport       = require('passport');
 var flash          = require('connect-flash');
-var port           = 80;
+var port           = 3000;
 
 //set ejs as view engine
 app.set('view engine', 'ejs');
