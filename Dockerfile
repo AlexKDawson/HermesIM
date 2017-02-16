@@ -15,6 +15,9 @@ RUN npm install
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+#Copy data to working dir
+COPY . /usr/src/app/
+
 # Expose our development port
 EXPOSE 3000
 
