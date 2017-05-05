@@ -14,10 +14,15 @@ exports.output = function(req, res){
 
   for(var j = 0, k = arraySize; j < k; j++){
     User.findOne({ 'email' :  req.body["freqs[]"][j] }, function(err, user) {
-      userArray.push(JSON.parse(JSON.stringify(user.username)));
-      console.log(arraySize + " " + userArray);
-      callsCompleted = maybeSend(arraySize, callsCompleted, res, userArray);
-      console.log("calls completed: " + callsCompleted)
+      if(user){
+        userArray.push(JSON.parse(JSON.stringify(user.username)));
+        console.log(arraySize + " " + userArray);
+        callsCompleted = maybeSend(arraySize, callsCompleted, res, userArray);
+        console.log("calls completed: " + callsCompleted);
+      }
+      else{
+        j = k;
+      }
     });
   }
 }

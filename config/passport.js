@@ -2,6 +2,8 @@
 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
+var passport = require('passport');
+//var BasicStrategy = require('passport-http').BasicStrategy;
 
 // load up the user model
 var User            = require('../app/models/user');
@@ -51,7 +53,7 @@ module.exports = function(passport) {
           newUser.email    = email;
           newUser.password = newUser.generateHash(password);
           newUser.username = req.body.username;
-          newUser.image = "http://imgur.com/a/hoBED";
+          newUser.image = "http://i.imgur.com/HBHzMSI.png";
 
           // save the user
           newUser.save(function(err) {
@@ -63,7 +65,6 @@ module.exports = function(passport) {
       });
     });
   }));
-
 
   //LOGIN
   passport.use('local-login', new LocalStrategy({
@@ -77,15 +78,22 @@ module.exports = function(passport) {
     // find a user whose email is the same as the forms email
     User.findOne({ 'email' :  email }, function(err, user) {
       // if there are any errors, return the error before anything else
-      if (err)
+      if (err){
+        console.log("Error: Unknown");
         return done(err);
+      }
       // if no user is found, return the message
-      if (!user)
+      if (!user){
+        console.log("Error: User not found");
         return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+      }
       // if the user is found but the password is wrong
-      if (!user.validPassword(password))
+      if (!user.validPassword(password)){
+        console.log("Error: Wrong password");
         return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+      }
       // all is well, return successful user
+        console.log("Success: Redirecting...");
         return done(null, user);
     });
   }));

@@ -4,6 +4,7 @@ var send = require('./controllers/send.js');
 var retrieve = require('./controllers/retrieve.js');
 var addFriend = require('./controllers/addFriend.js');
 var getUser = require('./controllers/getUser.js');
+var getProfile = require('./controllers/getProfile.js');
 
 module.exports = function(app, passport){
 
@@ -37,15 +38,25 @@ module.exports = function(app, passport){
     getUser.output(req,res);
   });
 
+  app.get('/debug', isLoggedIn, function(req, res){
+    console.log("DEBUG SCREEN");
+    getProfile.output(req, res, function(usr){
+      console.log(usr);
+      res.render(__dirname + '/views/debug.ejs', {
+        user: usr
+      });
+    });
+  });
+
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/messaging', // redirect to the secure profile section
+    successRedirect : '/debug', // redirect to the secure profile section
     failureRedirect : '/', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
 
   // process the login form
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/messaging', // redirect to the secure profile section
+    successRedirect : '/debug', // redirect to the secure profile section
     failureRedirect : '/', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
