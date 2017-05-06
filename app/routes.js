@@ -39,11 +39,12 @@ module.exports = function(app, passport){
   });
 
   app.get('/debug', isLoggedIn, function(req, res){
+
     console.log("DEBUG SCREEN");
     getProfile.output(req, res, function(usr){
       console.log(usr);
       res.render(__dirname + '/views/debug.ejs', {
-        user: usr
+        userFrndReqs: req.user.frReqs
       });
     });
   });
