@@ -41,16 +41,35 @@
 END NAVBAR-->
 
 
-  <h2> Hello, <!-- TODO --> </h2>
-  <img id= "profileimg" src= /> <!-- TODO -->
-  <div class = "" style = "width: 300px; background-color: cyan;">
+
+  <!--Profile Image and name-->
+  <div ng-controller = "AngularMainController" ng-init = "userName = '<%=userName%>'"  style = "width: 300px;">
+    <h2> Hello, {{userName}} </h2>
+  </div>
+  <div ng-controller = "AngularMainController" ng-init = "profPic = '<%=userPic%>'"  style = "width: 300px;">
+    <img id= "profileimg" ng-src={{profPic}} />
+  </div>
+
+
+
+
+  <!--Friend Reqs -->
+  <div ng-controller = "AngularMainController" ng-init = "frnds = '<%=userFrnds%>'.split(',')"  style = "width: 300px; background-color: cyan;">
     <h3>Friends</h3>
-    <!-- TODO -->
+    <div ng-repeat = "frnd in frnds">
+      {{frnd}}
+    </div>
   </div>
-  <div ng-controller = "AngularMainController" ng-init = "frndReqs = '<%=userFrndReqs%>'" style = "width: 300px; background-color: red;">
+
+
+  <!--Friend Reqs -->
+  <div ng-controller = "AngularMainController" ng-init = "frndReqs = '<%=userFrndReqs%>'.split(',')"  style = "width: 300px; background-color: red;">
     <h3>Friend Reqs</h3>
-      {{frndReqs}}
+    <div ng-repeat = "frndReq in frndReqs">
+      {{frndReq}}
+    </div>
   </div>
+
 </div>
 </body>
 

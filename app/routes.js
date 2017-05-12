@@ -44,7 +44,10 @@ module.exports = function(app, passport){
     getProfile.output(req, res, function(usr){
       console.log(usr);
       res.render(__dirname + '/views/debug.ejs', {
-        userFrndReqs: req.user.frReqs
+        userFrndReqs: req.user.frReqs,
+        userFrnds: req.user.friends,
+        userName: req.user.username,
+        userPic: req.user.image
       });
     });
   });

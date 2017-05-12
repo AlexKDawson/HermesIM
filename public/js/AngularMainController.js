@@ -15,14 +15,14 @@
 //   }
 // });
 
-app.controller('AngularMainController', function($scope, $window) {
-  $http({
-    method  : 'POST',
-    url     : '/freqprofiles',
-    data    : $.param({"frndReqs":'<%=user.frReqs%>'.split(',')}),
-    headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-  })
-  .success(function(data, status, headers, config){
-    $scope.frndReqs = "Eureka!";
-  });
+app.controller('AngularMainController', function($scope, $http) {
+  // $http({
+  //   method  : 'POST',
+  //   url     : '/freqprofiles',
+  //   data    : {"frndReqs":'<%=user.frReqs%>'.split(',')},
+  //   headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+  // })
+  // .success(function(data, status, headers, config){
+  //   $scope.frndReqs = "Eureka!";
+  // });
 });
