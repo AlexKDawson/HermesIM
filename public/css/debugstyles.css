@@ -2,3 +2,8 @@
   width: 200px;
   height: 200px;
 }
+
+.acceptButton{
+  float:right;
+  margin-right: 40%;
+}
