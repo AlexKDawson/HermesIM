@@ -5,6 +5,7 @@ var retrieve = require('./controllers/retrieve.js');
 var addFriend = require('./controllers/addFriend.js');
 var getUser = require('./controllers/getUser.js');
 var getProfile = require('./controllers/getProfile.js');
+var frndReqs = require('./controllers/frndReqs.js');
 
 module.exports = function(app, passport){
 
@@ -28,6 +29,10 @@ module.exports = function(app, passport){
   app.post('/messaging', isLoggedIn, function(req, res){
     send.msg(req, res);
     res.redirect('/messaging'); //use a callback
+  });
+
+  app.post('/acceptFrndReq', isLoggedIn, function(req, res){
+    frndReqs.acceptFrndReq(req, res);
   });
 
   app.post('/freq', isLoggedIn, function(req, res){

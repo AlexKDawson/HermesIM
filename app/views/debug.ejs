@@ -79,7 +79,7 @@ END NAVBAR-->
     <div ng-repeat = "frndReq in frndReqs">
       <form action="/acceptFrndReq" method="post">
         {{frndReq}}
-        <input type="hidden" name="accept" value="{{frndReq}}" readonly>
+        <input type="hidden" name="frndEmail" value="{{frndReq}}" readonly>
         <input class="acceptButton" type="submit" value="Accept">
       </form>
       <br>
