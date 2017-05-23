@@ -35,7 +35,7 @@
   </nav>
 
 
-<div >
+<div ng-controller = "AngularMainController" ng-init = "init('<%=userFrndReqs%>', '<%=userFrnds%>', '<%=userName%>', '<%=userPic%>')" >
   <!-- <nav class="friendbar navbar navbar-default">
     <div class = "row">
         <div ng-controller="addFriendController">
@@ -54,18 +54,18 @@ END NAVBAR-->
 
 
   <!--Profile Image and name-->
-  <div ng-controller = "AngularMainController" ng-init = "userName = '<%=userName%>'"  style = "width: 300px;">
+  <div style = "width: 300px;">
     <h2> Hello, {{userName}} </h2>
   </div>
-  <div ng-controller = "AngularMainController" ng-init = "profPic = '<%=userPic%>'"  style = "width: 300px;">
+  <div style = "width: 300px;">
     <img id= "profileimg" ng-src={{profPic}} />
   </div>
 
 
 
 
-  <!--Friend Reqs -->
-  <div ng-controller = "AngularMainController" ng-init = "frnds = '<%=userFrnds%>'.split(',')"  style = "width: 300px; background-color: cyan;">
+  <!--Friends -->
+  <div   style = "width: 300px; background-color: cyan;">
     <h3>Friends</h3>
     <div ng-repeat = "frnd in frnds">
       {{frnd}}
@@ -74,14 +74,12 @@ END NAVBAR-->
 
 
   <!--Friend Reqs -->
-  <div ng-controller = "AngularMainController" ng-init = "frndReqs = '<%=userFrndReqs%>'.split(',')"  style = "width: 300px; background-color: red;">
+  <div style = "width: 300px; background-color: red;">
     <h3>Friend Reqs</h3>
-    <div ng-repeat = "frndReq in frndReqs">
-      <form action="/acceptFrndReq" method="post">
+    <div ng-show={{frndReqs.length}} ng-repeat = "frndReq in frndReqs.split(',')">
         {{frndReq}}
-        <input type="hidden" name="frndEmail" value="{{frndReq}}" readonly>
-        <input class="acceptButton" type="submit" value="Accept">
-      </form>
+        <input class="acceptButton" type="button" value="Accept" ng-click="acceptFriendRequest(frndReq)">
+        <input class="rejectButton" type="button" value="Reject" ng-click="rejectFriendRequest(frndReq)">
       <br>
     </div>
   </div>

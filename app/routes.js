@@ -35,6 +35,10 @@ module.exports = function(app, passport){
     frndReqs.acceptFrndReq(req, res);
   });
 
+  app.post('/rejectFrndReq', isLoggedIn, function(req, res){
+    frndReqs.rejectFrndReq(req, res);
+  });
+
   app.post('/freq', isLoggedIn, function(req, res){
     addFriend.add(req, res);
   });
