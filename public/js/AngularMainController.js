@@ -1,24 +1,8 @@
-
-// app.controller('addFriendController', function($scope, $http) {
-//   $scope.formData = {"userEmail": "<%=user.email%>"};
-//
-//   $scope.processForm = function() {
-//     $http({
-//       method  : 'POST',
-//       url     : '/freq',
-//       data    : $.param($scope.formData),  // pass in data as strings
-//       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-//     })
-//     .success(function(data, status, headers, config){
-//       $scope.addFriendFlash = data;
-//     });
-//   }
-// });
-
+//TODO RENAME CONTROLLER AND ADD MORE
 app.controller('AngularMainController', function($scope, $http) {
 
   $scope.init = function(frndReqs, frnds, userName, profPic){
-    $scope.frndReqs = frndReqs;
+    $scope.frndReqs = frndReqs.split(',');
     $scope.frnds = frnds.split(',');
     $scope.userName = userName;
     $scope.profPic = profPic;
@@ -32,8 +16,10 @@ app.controller('AngularMainController', function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
     })
     .success(function(data, status, headers, config){
-      $scope.frnds.push(data.friends[data.friends.length - 1]);
-      $scope.frndReqs = data.frReqs; //TODO PULL
+      console.log(JSON.stringify(data));
+      $scope.frnds.push(data.user.friends[data.user.friends.length - 1]);
+      var index = $scope.frndReqs.indexOf(data.friend);
+      $scope.frndReqs.splice(index, 1);
     });
   }
 
@@ -45,7 +31,8 @@ app.controller('AngularMainController', function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
     })
     .success(function(data, status, headers, config){
-      $scope.frndReqs = data.frReqs; //TODO PULL
+      var index = $scope.frndReqs.indexOf(data.friend);
+      $scope.frndReqs.splice(index, 1);
     });
   }
 });

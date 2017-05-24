@@ -74,12 +74,14 @@ END NAVBAR-->
 
 
   <!--Friend Reqs -->
-  <div style = "width: 300px; background-color: red;">
+  <div style = "min-width: 300px; max-width: 500px; background-color: red;">
     <h3>Friend Reqs</h3>
-    <div ng-show={{frndReqs.length}} ng-repeat = "frndReq in frndReqs.split(',')">
-        {{frndReq}}
+    <div ng-show= "{{ frndReqs.length }} == 1 ? ('{{frndReqs[0]}}' == '' ? {{frndReqs.length - 1}} : {{frndReqs.length}}) : {{frndReqs.length}}" ng-repeat = "frndReq in frndReqs">
+      <span class = "frndReqRow">
+        <div class="friendName">{{frndReq}}</div>
         <input class="acceptButton" type="button" value="Accept" ng-click="acceptFriendRequest(frndReq)">
         <input class="rejectButton" type="button" value="Reject" ng-click="rejectFriendRequest(frndReq)">
+      </span>
       <br>
     </div>
   </div>

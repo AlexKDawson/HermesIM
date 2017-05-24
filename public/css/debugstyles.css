@@ -4,6 +4,14 @@
 }
 
 .acceptButton{
-  float:right;
-  margin-right: 40%;
+  margin-left: 20%;
+}
+
+.rejectButton{
+  margin-left: 10%;
+}
+
+.friendName{
+  display: inline-block;
+  width: 10vw;
 }
