@@ -26,30 +26,26 @@
 </head>
 
 <body ng-app = "myApp">
-<!--NAVBAR -->
+  <div ng-controller = "AngularMainController" ng-init = "init('<%=userFrndReqs%>', '<%=userFrnds%>', '<%=userName%>', '<%=userPic%>')" >
 
+  <!--NAVBAR -->
   <nav class="navbar navbar-default">
     <div class = "row">
-      <h2 class = "navbar-title col-md-2"><a href = "/messaging"> Hermes <img src = "favicon.png" height = "30" class = "navbar-icon"></a></h2>
+      <h2 class = "navbar-title col-md-2"><a href = "/debug"> Hermes <img src = "favicon.png" height = "30" class = "navbar-icon"></a></h2>
     </div>
   </nav>
-
-
-<div ng-controller = "AngularMainController" ng-init = "init('<%=userFrndReqs%>', '<%=userFrnds%>', '<%=userName%>', '<%=userPic%>')" >
-  <!-- <nav class="friendbar navbar navbar-default">
+  <nav class="friendbar navbar navbar-default">
     <div class = "row">
-        <div ng-controller="addFriendController">
-          <row>
-            <form ng-submit="processForm()">
-              <input type="text" ng-model="formData.friendEmail">
-              <button type="submit">Add</button>
-            </form>
-          </row>
-        </div>
-        <p class = "addFrFlash">{{addFriendFlash}}</p>
+      <row>
+        <form ng-submit="sendFrndReq(reqEmail)">
+          <input type="text" ng-model="reqEmail">
+          <button type="submit">Send Request</button>
+        </form>
+      </row>
+      <p class = "addFrFlash">{{frndReqFlash}}</p>
     </div>
   </nav>
-END NAVBAR-->
+  <!--END NAVBAR-->
 
 
 
@@ -65,16 +61,17 @@ END NAVBAR-->
 
 
   <!--Friends -->
-  <div   style = "width: 300px; background-color: cyan;">
+  <div class="frndsBox">
     <h3>Friends</h3>
-    <div ng-repeat = "frnd in frnds">
+    <div <div ng-show= "{{ frnds.length }} == 1 ? ('{{frnds[0]}}' == '' ? {{frnds.length - 1}} : {{frnds.length}}) : {{frnds.length}}" ng-repeat = "frnd in frnds">
       {{frnd}}
+      <input class="rejectButton" type="button" value="Remove" ng-click="removeFriend(frnd)">
     </div>
   </div>
 
 
   <!--Friend Reqs -->
-  <div style = "min-width: 300px; max-width: 500px; background-color: red;">
+  <div class="frndReqsBox">
     <h3>Friend Reqs</h3>
     <div ng-show= "{{ frndReqs.length }} == 1 ? ('{{frndReqs[0]}}' == '' ? {{frndReqs.length - 1}} : {{frndReqs.length}}) : {{frndReqs.length}}" ng-repeat = "frndReq in frndReqs">
       <span class = "frndReqRow">
@@ -85,7 +82,6 @@ END NAVBAR-->
       <br>
     </div>
   </div>
-
 </div>
 </body>
 

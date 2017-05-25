@@ -8,70 +8,70 @@
 </head>
 
 <body>
-<!--NAVBAR -->
-  <script>
+  <!--NAVBAR -->
+    <script>
 
-    var app = angular.module('app', []);
+      var app = angular.module('app', []);
 
-    app.controller('addFriendController', function($scope, $http) {
-      $scope.formData = {"userEmail": "<%=user.email%>"};
+      app.controller('addFriendController', function($scope, $http) {
+        $scope.formData = {"userEmail": "<%=user.email%>"};
 
-      $scope.processForm = function() {
+        $scope.processForm = function() {
+          $http({
+            method  : 'POST',
+            url     : '/freq',
+            data    : $.param($scope.formData),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+          })
+          .success(function(data, status, headers, config){
+            $scope.addFriendFlash = data;
+          });
+        }
+      });
+
+      app.controller('seeFreqsController', function($scope, $http) {
         $http({
           method  : 'POST',
-          url     : '/freq',
-          data    : $.param($scope.formData),  // pass in data as strings
+          url     : '/freqprofiles',
+          data    : $.param({"freqs":'<%=user.frReqs%>'.split(',')}),
           headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data, status, headers, config){
-          $scope.addFriendFlash = data;
+          $scope.freqProfiles = data;
         });
-      }
-    });
-
-    app.controller('seeFreqsController', function($scope, $http) {
-      $http({
-        method  : 'POST',
-        url     : '/freqprofiles',
-        data    : $.param({"freqs":'<%=user.frReqs%>'.split(',')}),
-        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-      })
-      .success(function(data, status, headers, config){
-        $scope.freqProfiles = data;
       });
-    });
 
 
 
-  </script>
+    </script>
 
-  <nav class="navbar navbar-default">
-    <div class = "row">
-      <h2 class = "navbar-title col-md-2"><a href = "/messaging"> Hermes <img src = "favicon.png" height = "30" class = "navbar-icon"></a></h2>
-    </div>
-  </nav>
+    <nav class="navbar navbar-default">
+      <div class = "row">
+        <h2 class = "navbar-title col-md-2"><a href = "/messaging"> Hermes <img src = "favicon.png" height = "30" class = "navbar-icon"></a></h2>
+      </div>
+    </nav>
 
 
 
-  <nav class="friendbar navbar navbar-default">
-    <div class = "row">
-      <div ng-app="app">
-        <div ng-controller="addFriendController">
-          <row>
-            <form ng-submit="processForm()">
-              <input type="text" ng-model="formData.friendEmail">
-              <button type="submit">Add</button>
-            </form>
-          </row>
-        </div>
-        <p class = "addFrFlash">{{addFriendFlash}}</p>
-        <div ng-controller="seeFreqsController" class="ng-scope">
-          <p>{{freqProfiles}}</p>
+    <nav class="friendbar navbar navbar-default">
+      <div class = "row">
+        <div ng-app="app">
+          <div ng-controller="addFriendController">
+            <row>
+              <form ng-submit="processForm()">
+                <input type="text" ng-model="formData.friendEmail">
+                <button type="submit">Add</button>
+              </form>
+            </row>
+          </div>
+          <p class = "addFrFlash">{{addFriendFlash}}</p>
+          <div ng-controller="seeFreqsController" class="ng-scope">
+            <p>{{freqProfiles}}</p>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-<!--END NAVBAR-->
+    </nav>
+  <!--END NAVBAR-->
 
 
   <h2> Hello, <%= user.username %> </h2>

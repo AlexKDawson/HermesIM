@@ -2,7 +2,6 @@
 
 var send = require('./controllers/send.js');
 var retrieve = require('./controllers/retrieve.js');
-var addFriend = require('./controllers/addFriend.js');
 var getUser = require('./controllers/getUser.js');
 var getProfile = require('./controllers/getProfile.js');
 var frndReqs = require('./controllers/frndReqs.js');
@@ -39,8 +38,12 @@ module.exports = function(app, passport){
     frndReqs.rejectFrndReq(req, res);
   });
 
-  app.post('/freq', isLoggedIn, function(req, res){
-    addFriend.add(req, res);
+  app.post('/removeFrnd', isLoggedIn, function(req, res){
+    frndReqs.removeFrnd(req, res);
+  });
+
+  app.post('/sendFrndReq', isLoggedIn, function(req, res){
+    frndReqs.sendFrndReq(req, res);
   });
 
   app.post('/freqProfiles', isLoggedIn, function(req, res){

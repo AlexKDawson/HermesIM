@@ -10,6 +10,11 @@ p{
 
 html{
   overflow: hidden;
+  height: 100%;
+}
+
+body{
+  height: 100%;
 }
 
 .aln-center{
@@ -59,4 +64,23 @@ html{
 
 .addFrFlash{
   color: black;
+}
+
+#footer {
+  display: fixed;
+  height: wrap; /* the footer's total height */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: left;
+}
+
+#footer-content {
+  background-color: #f3e5f5;
+  border: 1px solid red;
+  height: 100%; /* height + top/bottom paddding + top/bottom border must add up to footer height */
+  padding: 8px;
 }
