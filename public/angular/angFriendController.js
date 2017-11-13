@@ -1,12 +1,7 @@
-//TODO RENAME CONTROLLER AND ADD MORE
-app.controller('AngularMainController', function($scope, $http) {
+var app = angular.module('app', []);
 
-  $scope.init = function(frndReqs, frnds, userName, profPic){
-    $scope.frndReqs = frndReqs.split(',');
-    $scope.frnds = frnds.split(',');
-    $scope.userName = userName;
-    $scope.profPic = profPic;
-  }
+//This controller manages anything to do with managing a users friends list
+app.controller('angFriendController', function($scope, $http) {
 
   $scope.acceptFriendRequest = function(frndEmail) {
     $http({
@@ -16,10 +11,8 @@ app.controller('AngularMainController', function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
     })
     .success(function(data, status, headers, config){
-      console.log(JSON.stringify(data));
-      $scope.frnds.push(data.user.friends[data.user.friends.length - 1]);
-      var index = $scope.frndReqs.indexOf(data.friend);
-      $scope.frndReqs.splice(index, 1);
+      $scope.getFriends();
+        $scope.getFriendReqs();
     });
   }
 
@@ -31,12 +24,11 @@ app.controller('AngularMainController', function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
     })
     .success(function(data, status, headers, config){
-      var index = $scope.frndReqs.indexOf(data.friend);
-      $scope.frndReqs.splice(index, 1);
+      $scope.getFriendReqs();
     });
   }
 
-  $scope.sendFrndReq = function(reqEmail) {
+  $scope.sendFriendRequest = function() {
     $http({
       method  : 'POST',
       url     : '/sendFrndReq',
@@ -44,7 +36,7 @@ app.controller('AngularMainController', function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
     })
     .success(function(data, status, headers, config){
-      $scope.frndReqFlash = data;
+      $scope.friendReqFlash = data;
     });
   }
 
@@ -56,8 +48,35 @@ app.controller('AngularMainController', function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
     })
     .success(function(data, status, headers, config){
-      var index = $scope.frnds.indexOf(data.friend);
-      $scope.frnds.splice(index, 1);
+      $scope.getFriends();
     });
   }
+
+  $scope.getFriendReqs = function(){
+    $http({
+      method : 'GET',
+      url    : '/getFriendReqs',
+    })
+    .success(function(data, status, headers, config){
+      $scope.friendRequests = data;
+    });
+  }
+
+  $scope.getFriends = function(){
+    $http({
+      method : 'GET',
+      url    : '/getFriends',
+    })
+    .success(function(data, status, headers, config){
+      $scope.friends = data;
+    });
+  }
+
+  $scope.init = function(){
+    $scope.getFriendReqs();
+    $scope.getFriends();
+  }
+
+  $scope.init();
+
 });

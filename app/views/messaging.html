@@ -1,0 +1,122 @@
+<!-- app/views/home.ejs -->
+
+<!DOCTYPE html>
+<html
+ ng-app="app">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>HermesIM | Messaging</title>
+
+    <!--JQUERY -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <!--ANGULARJS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
+    <!--LOCAL SCRIPTS-->
+    <script src="scripts/messaging_scripts.js"></script>
+    <script src="angular/angFriendController.js"></script>
+
+
+
+    <!--BOOTSTRAP -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!--FAVICON -->
+    <link rel='shortcut icon' href='/favicon.png' type='image/png' />
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="css/styles.css"/>
+
+
+  </head>
+
+  <body>
+    <!--NAVBAR -->
+      <nav class="navbar navbar-default">
+        <div class = "row">
+          <h2 class = "navbar-title col-md-2"><a href = "/messaging"> Hermes <img src = "favicon.png" height = "30" class = "navbar-icon"></a></h2>
+        </div>
+      </nav>
+
+      <nav class="friendbar navbar navbar-default" ng-controller="angFriendController">
+        <div class = "row">
+          <row>
+            <form class = "friend-add" ng-submit="sendFriendRequest()">
+              <input type="text" ng-model=" reqEmail">
+              <button type="submit">Add</button>
+              <span class = "flash"> {{friendReqFlash}} </span>
+            </form>
+            Friend requests:
+            <div class = "horiz-scroll">
+                <table>
+                  <tr>
+                    <td ng-repeat="n in friendRequests">
+                      <div class="friendRequestList">
+                        {{n}}
+                        <button ng-click="acceptFriendRequest(n)" class="btn btn-basic">Accept</button>
+                        <button ng-click="rejectFriendRequest(n)" class="btn btn-danger">Reject</button>
+                      </div>
+                    </td>
+                  <tr>
+                </table>
+              </div>
+              Friends:
+              <div class = "horiz-scroll">
+                <table>
+                  <tr>
+                    <td ng-repeat="n in friends">
+                      <div class="friendRequestList">
+                        {{n}}
+                        <button ng-click="removeFriend(n)" class="btn btn-danger">Remove</button>
+                      </div>
+                    </td>
+                  <tr>
+                </table>
+              </div>
+            </div>
+
+          </row>
+          <p class = "addFrFlash">{{addFriendFlash}}</p>
+        </div>
+      </nav>
+    <!--END NAVBAR-->
+
+
+    <h2> Hello, {{username}}</h2>
+
+    <div  id = "grouplist">
+      <button> Create Group </button>
+
+      <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+    </div>
+    <div style = "overflow:scroll; height: 800px; padding:50px; background-color: #D9E9FF">
+      <table>
+      <tr>
+        <th>Sender</th>
+        <th>Message</th>
+        <th>Time stamp</th>
+      </tr>
+
+      </table>
+
+      <div class = "bottombar">
+        <tr>
+          <form action="/messaging" method="post">
+            <input type="text" id = "messagebox" name="message" placeholder="Your Message">
+            <input type="submit" id = "sendbutton" value="Send">
+          </form>
+        </tr>
+      </div>
+
+    </div>
+  </body>
+</html>

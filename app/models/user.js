@@ -19,6 +19,9 @@ var userSchema = new Schema({
   ],
   frReqs:[
     String
+  ],
+  groups:[
+    String
   ]
 });
 

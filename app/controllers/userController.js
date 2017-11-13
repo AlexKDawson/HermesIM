@@ -27,6 +27,37 @@ exports.output = function(req, res){
   }
 }
 
+exports.getGroups = function(req, res){
+  User.findOne({ 'email' : req.user.email}, function(err, user){
+    if(err){
+      res.json(err);
+    }
+    else
+      res.send(user.groups);
+  });
+}
+
+exports.getFriendReqs = function(req, res){
+  User.findOne({ 'email' : req.user.email}, function(err, user){
+    if(err){
+      res.json(err);
+    }
+    else
+      res.send(user.frReqs);
+  });
+}
+
+exports.getFriends = function(req, res){
+  User.findOne({ 'email' : req.user.email}, function(err, user){
+    if(err){
+      res.json(err);
+    }
+    else
+      res.send(user.friends);
+  });
+}
+
+
 function maybeSend(size, calls, res, array){
   calls++;
   if(calls == size){

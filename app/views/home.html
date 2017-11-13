@@ -3,7 +3,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%- include("./helpers/head.ejs")%>
+    <meta charset="UTF-8">
+    <title>HermesIM | Messaging</title>
+
+
+    <!--ANGULARJS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
+    <!--LOCAL SCRIPTS-->
+    <script src="scripts/messaging_scripts.js"/>
+    <script src="angular/angFriendController.js"/>
+
+    <!--JQUERY -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <!--BOOTSTRAP -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!--FAVICON -->
+    <link rel='shortcut icon' href='/favicon.png' type='image/png' />
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="css/styles.css"/>
   </head>
   <body>
 
@@ -27,9 +50,7 @@
           <div style="padding-top:30px" class="panel-body" >
             <h2> Sign up </h2>
             <br>
-            <% if (signupMessage.length > 0) { %>
-              <div class="alert alert-danger"><%= signupMessage %></div>
-            <% } %>
+            {{signupMessage}}
 
             <form action="/signup" method="post">
               <div class = "form-group">
@@ -72,9 +93,7 @@
           <div style="padding-top:30px" class="panel-body" >
             <h2> Log in </h2>
             <br>
-            <% if (loginMessage.length > 0) { %>
-              <div class="alert alert-danger"><%= loginMessage %></div>
-            <% } %>
+            {{loginMessage}}
 
             <form action="/login" method="post">
 
@@ -101,9 +120,7 @@
       <!--END LOGIN BOX -->
     </div>
     <footer id="footer">
-      <div id="footer-content">Caution: This website is currently under development
-      and while I try to do my best to keep data on this site safe (hashing and salting
-      passwords and such), I have yet to fully analyze the security of my database.
+      <div id="footer-content">Caution: This website is currently under development.
       <strong>Assume any emails, passwords, and messages used/sent on this site are susceptible to hacking.</strong>
       Thank you for checking out Hermes!! <br> P.S. If you don't want to use your real email, the signup box only
       requires *name*@*domain*.*tld*. Once the email is in this format and is not already in the database, it will work

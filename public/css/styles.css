@@ -84,3 +84,46 @@ body{
   height: 100%; /* height + top/bottom paddding + top/bottom border must add up to footer height */
   padding: 8px;
 }
+
+.bottombar{
+  display: fixed;
+  height: wrap; /* the footer's total height */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: left;
+}
+
+.friendRequestList{
+  background-color: white;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+.friend-add{
+  margin-bottom: 5px;
+}
+
+#messagebox{
+    width: 90%;
+}
+
+#sendbutton{
+  width: 8%;
+}
+
+#grouplist{
+  margin-left: 90%;
+  width: 8%;
+}
+
+.flash{
+  color: red;
+}
+
+.horiz-scroll{
+  overflow-x: scroll;
+}
