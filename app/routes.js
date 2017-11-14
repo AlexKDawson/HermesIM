@@ -29,6 +29,10 @@ module.exports = function(app, passport){
     res.redirect('/messaging'); //use a callback
   });
 
+  app.post('/sendMessage', isLoggedIn, function(req, res){
+    groups.sendMessage(req, res);
+  });
+
   app.post('/acceptFrndReq', isLoggedIn, function(req, res){
     friendReqController.acceptFrndReq(req, res);
   });
@@ -51,6 +55,14 @@ module.exports = function(app, passport){
 
   app.post('/createGroup', isLoggedIn, function(req, res){
     groups.createGroup(req, res);
+  });
+
+  app.get('/getUserName', isLoggedIn, function(req, res){
+    user.getUserName(req, res);
+  });
+
+  app.get('/getGroups', isLoggedIn, function(req, res){
+    user.getGroups(req, res);
   });
 
   // app.get('/debug', isLoggedIn, function(req, res){

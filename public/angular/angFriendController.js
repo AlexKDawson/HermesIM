@@ -80,3 +80,77 @@ app.controller('angFriendController', function($scope, $http) {
   $scope.init();
 
 });
+
+app.controller('angUserController', function($scope, $http) {
+
+  $scope.getUserName = function(){
+    $http({
+      method  : 'GET',
+      url     : '/getUserName'
+    })
+    .success(function(data, status, headers, config){
+      $scope.username = data;
+    });
+  }
+
+  $scope.init = function(){
+    $scope.getUserName();
+  }
+
+  $scope.init();
+});
+
+app.controller('angGroupController', function($scope, $http) {
+
+  $scope.getGroups = function(){
+    $http({
+      method  : 'GET',
+      url     : '/getGroups',
+    })
+    .success(function(data, status, headers, config){
+      $scope.groups = data;
+      $scope.getCurrentGroup();
+    });
+  }
+
+  $scope.init = function(){
+    $scope.getGroups();
+  }
+
+  $scope.getCurrentGroup = function(){
+    for( var g of $scope.groups){
+      if(g.groupID === $scope.currentGroupID){
+        $scope.currentGroup = g;
+        $scope.messageDraft = "";
+        return;
+      }
+    }
+  }
+
+  $scope.createNewGroup = function(){
+    $http({
+      method  : 'POST',
+      url     : '/createGroup',
+      data    : $.param({'newGroupName' : $scope.newGroupName}),  // pass in data as strings
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+    })
+    .success(function(data, status, headers, config){
+      $scope.getGroups();
+    });
+
+  }
+
+  $scope.sendMessage = function(){
+    $http({
+      method  : 'POST',
+      url     : '/sendMessage',
+      data    : $.param({'groupID' : $scope.currentGroup.groupID, 'message' : $scope.messageDraft}),  // pass in data as strings
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+    })
+    .success(function(data, status, headers, config){
+      $scope.getGroups();
+    });
+  }
+
+  $scope.init();
+});

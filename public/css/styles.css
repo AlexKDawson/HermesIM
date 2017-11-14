@@ -127,3 +127,11 @@ body{
 .horiz-scroll{
   overflow-x: scroll;
 }
+
+.messageLine{
+  padding-right: 10px;
+}
+
+td{
+  vertical-align: top;
+}

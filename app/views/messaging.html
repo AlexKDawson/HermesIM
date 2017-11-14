@@ -20,7 +20,6 @@
     <script src="angular/angFriendController.js"></script>
 
 
-
     <!--BOOTSTRAP -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -85,38 +84,39 @@
       </nav>
     <!--END NAVBAR-->
 
-
-    <h2> Hello, {{username}}</h2>
-
-    <div  id = "grouplist">
-      <button> Create Group </button>
-
-      <select>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
+    <div ng-controller = "angUserController">
+      <h2> Hello, {{username}}</h2>
     </div>
-    <div style = "overflow:scroll; height: 800px; padding:50px; background-color: #D9E9FF">
-      <table>
-      <tr>
-        <th>Sender</th>
-        <th>Message</th>
-        <th>Time stamp</th>
-      </tr>
 
-      </table>
 
-      <div class = "bottombar">
-        <tr>
-          <form action="/messaging" method="post">
-            <input type="text" id = "messagebox" name="message" placeholder="Your Message">
-            <input type="submit" id = "sendbutton" value="Send">
-          </form>
-        </tr>
+    <div ng-controller = "angGroupController">
+      <div id="grouplist">
+        <form ng-submit="createNewGroup()">
+          <input  style="float:right" type="text" ng-model="newGroupName"></input>
+          <button style="float:right" type="submit"> Create Group </button>
+        </form>
+        <select ng-model = "currentGroupID" ng-change = "getCurrentGroup()" style="float:right">
+          <option ng-repeat= "g in groups" value="{{g.groupID}}">{{g.name}}</option>
+        </select>
       </div>
 
+      <div style = "overflow:scroll; height: 675px; padding:50px; background-color: #D9E9FF">
+        <table id ="messageTable">
+          <tr>
+            <h2> {{currentGroup.name}} </h2>
+          <tr ng-repeat = "m in currentGroup.messages">
+            <td class = " align-baseline messageLine"> {{m.sender}}: </td>
+            <td class = "messageLine"> {{m.message}} </td>
+          </tr>
+        </table>
+
+        <div class = "bottombar">
+            <form ng-submit="sendMessage()" method="post">
+              <input type="text" ng-model = "messageDraft" id = "messagebox" name="message" placeholder="Your Message">
+              <input type="submit" id = "sendbutton" value="Send">
+            </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>
